@@ -4,6 +4,5 @@ coverage
 bower_components
 
 #NodeCG builds
-/dashboard
-/extension
-/graphics
+# /dashboard
+# /extension
