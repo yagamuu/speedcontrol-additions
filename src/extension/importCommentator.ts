@@ -7,7 +7,7 @@ import { CommentatorArray } from '../nodecg/replicants';
 
 // eslint-disable-next-line @typescript-eslint/camelcase
 export const importCommentator = (nodecg: NodeCG, spreadsheet: sheets_v4.Sheets): void => {
-    const logger = new nodecg.Logger('ome-speedrun-layout:import-commentator');
+    const logger = new nodecg.Logger(`${nodecg.bundleName}:import-commentator`);
     const commentatorArrayRep = nodecg.Replicant('commentatorArray', {
         defaultValue: []
     });

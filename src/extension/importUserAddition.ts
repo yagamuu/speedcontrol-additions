@@ -6,7 +6,7 @@ import { SpeedcontrolUserAdditionArray } from '../nodecg/replicants';
 
 // eslint-disable-next-line @typescript-eslint/camelcase
 export const importUserAddition = (nodecg: NodeCG, spreadsheet: sheets_v4.Sheets): void => {
-    const logger = new nodecg.Logger('ome-speedrun-layout:import-user-addition');
+    const logger = new nodecg.Logger(`${nodecg.bundleName}:import-user-addition`);
     const userAdditionArrayRep = nodecg.Replicant('speedcontrolUserAdditionArray');
 
     const importAdditionFromSpreadsheet = async (
