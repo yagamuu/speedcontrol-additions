@@ -1,12 +1,11 @@
 {
   "name": "speedcontrol-additions",
   "version": "0.9.0",
-  "description": "NodeCG layout bundle for RTA 1n Kagawa Online.",
-  "homepage": "https://github.com/cma2819/ome-speedrun-layout#readme",
+  "description": "NodeCG layout bundle for adding social information to nodecg-speedcontrol",
+  "homepage": "https://github.com/cma2819/speedcontrol-additions#readme",
   "author": "Cma",
   "files": [
     "dashboard",
-    "graphics",
     "extension.js",
     "extension"
   ],
@@ -17,7 +16,7 @@
   "nodecg": {
     "compatibleRange": "^1.1.1",
     "bundleDependencies": {
-      "nodecg-speedcontrol": "^2.0.0"
+      "nodecg-speedcontrol": "^2.2.0"
     },
     "dashboardPanels": [
       {
@@ -57,79 +56,6 @@
         "width": 6,
         "file": "import-commentator/index.html",
         "dialog": true
-      },
-      {
-        "name": "spotify",
-        "title": "Spotify",
-        "width": 3,
-        "file": "spotify/index.html",
-        "headerColor": "#bcbcff",
-        "workspace": "Social"
-      },
-      {
-        "name": "twitter",
-        "title": "Twitter",
-        "width": 3,
-        "file": "twitter/index.html",
-        "headerColor": "#1da1f2",
-        "workspace": "Social"
-      }
-    ],
-    "graphics": [
-      {
-        "file": "Setup/index.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "SD_solo/index.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "SD_race/index.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "HD_solo/index.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "HD_race/index.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "3DS_solo/index.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "GBA_race/index.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "DS_solo_v/index.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "GB_solo_w_camera/index.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "DenshadeD_solo/index.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "Spotify/index.html",
-        "width": 1920,
-        "height": 108
       }
     ]
   },
@@ -141,11 +67,9 @@
     "build": "run-s clean build:*",
     "build:dashboard": "parcel build src/browser/dashboard/*/*.html --out-dir dashboard --public-url ./",
     "build:extension": "tsc -b src/extension/",
-    "build:graphics": "parcel build src/browser/graphics/*/*.html --out-dir graphics --public-url ./",
-    "clean": "trash .cache dashboard graphics extension",
+    "clean": "trash .cache dashboard extension",
     "watch:dashboard": "parcel watch src/browser/dashboard/*/*.html --out-dir dashboard --public-url ./",
     "watch:extension": "tsc -b src/extension/ -w",
-    "watch:graphics": "parcel watch src/browser/graphics/*/*.html --out-dir graphics --public-url ./",
     "start": "node ../..",
     "test": "echo \"Error: no test specified\" && exit 1",
     "schema-types": "nodecg schema-types -o src/nodecg/generated schemas",
@@ -153,11 +77,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cma2819/ome-speedrun-layout.git"
+    "url": "git+https://github.com/cma2819/speedcontrol-additions.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cma2819/ome-speedrun-layout/issues"
+    "url": "https://github.com/cma2819/speedcontrol-additions/issues"
   },
   "devDependencies": {
     "@types/clone": "^0.1.30",
