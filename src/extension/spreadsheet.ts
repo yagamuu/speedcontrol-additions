@@ -5,7 +5,7 @@ import { importCommentator } from './importCommentator';
 import { googleSpreadsheetUrlToId } from './lib/helper';
 
 export const spreadsheet = (nodecg: NodeCG): void => {
-    const logger = new nodecg.Logger('ome-speedrun-layout:spreadsheet');
+    const logger = new nodecg.Logger(`${nodecg.bundleName}:spreadsheet`);
     const googleApiDefinedRep = nodecg.Replicant('googleApiDefined', { defaultValue: false });
 
     const googleApiKey = nodecg.bundleConfig.googleApiKey;
