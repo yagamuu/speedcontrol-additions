@@ -6,7 +6,7 @@ var importUserAddition_1 = require("./importUserAddition");
 var importCommentator_1 = require("./importCommentator");
 var helper_1 = require("./lib/helper");
 exports.spreadsheet = function (nodecg) {
-    var logger = new nodecg.Logger('ome-speedrun-layout:spreadsheet');
+    var logger = new nodecg.Logger(nodecg.bundleName + ":spreadsheet");
     var googleApiDefinedRep = nodecg.Replicant('googleApiDefined', { defaultValue: false });
     var googleApiKey = nodecg.bundleConfig.googleApiKey;
     if (!googleApiKey) {

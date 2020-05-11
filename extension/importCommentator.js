@@ -5,7 +5,7 @@ var uuid_1 = require("uuid");
 var helper_1 = require("./lib/helper");
 // eslint-disable-next-line @typescript-eslint/camelcase
 exports.importCommentator = function (nodecg, spreadsheet) {
-    var logger = new nodecg.Logger('ome-speedrun-layout:import-commentator');
+    var logger = new nodecg.Logger(nodecg.bundleName + ":import-commentator");
     var commentatorArrayRep = nodecg.Replicant('commentatorArray', {
         defaultValue: []
     });

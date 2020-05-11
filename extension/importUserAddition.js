@@ -4,7 +4,7 @@ var tslib_1 = require("tslib");
 var helper_1 = require("./lib/helper");
 // eslint-disable-next-line @typescript-eslint/camelcase
 exports.importUserAddition = function (nodecg, spreadsheet) {
-    var logger = new nodecg.Logger('ome-speedrun-layout:import-user-addition');
+    var logger = new nodecg.Logger(nodecg.bundleName + ":import-user-addition");
     var userAdditionArrayRep = nodecg.Replicant('speedcontrolUserAdditionArray');
     var importAdditionFromSpreadsheet = function (url, sheetName, runnerIdIndex, nicoIndex, youtubeIndex, twitterIndex) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
         var spreadsheetId, valueResponse, additionDataArray;
