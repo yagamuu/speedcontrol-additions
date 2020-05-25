@@ -39,7 +39,7 @@ export default class AdditionUserList extends Vue {
   }[] {
     return this.userAdditionArray.map((userAddition: SpeedcontrolUserAddition) => {
       const speedcontrolPlayer = this.playerArray.find((player: SpeedcontrolPlayer) => {
-        return player.id === userAddition.id;
+        return player.externalID === userAddition.id;
       });
       return {
         player: speedcontrolPlayer,
