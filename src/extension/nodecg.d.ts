@@ -13,7 +13,7 @@ type SpeedcontrolNodeCG = CreateNodecgInstance<
 >
 
 export type NodeCG = CreateNodecgInstance<
-  'ome-speedrun-layout',
+  'speedcontrol-additions',
   Configschema,
   ReplicantMap,
   MessageMap
