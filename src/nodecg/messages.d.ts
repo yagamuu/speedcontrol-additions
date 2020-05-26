@@ -40,4 +40,14 @@ export type MessageMap = {
         },
         result: boolean;
     }
+    
+    'importTwitchGamesFromSpreadsheet': {
+        data: {
+            url: string;
+            sheetName: string;
+            lineIdIndex: number;
+            gameNameIndex: number;
+        },
+        result: boolean;
+    }
 };
