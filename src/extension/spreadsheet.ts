@@ -3,6 +3,7 @@ import { google } from 'googleapis';
 import { importUserAddition } from './importUserAddition';
 import { importCommentator } from './importCommentator';
 import { googleSpreadsheetUrlToId } from './lib/helper';
+import { importTwitchGames } from './importTwitchGames';
 
 export const spreadsheet = (nodecg: NodeCG): void => {
     const logger = new nodecg.Logger(`${nodecg.bundleName}:spreadsheet`);
@@ -67,5 +68,6 @@ export const spreadsheet = (nodecg: NodeCG): void => {
 
     importUserAddition(nodecg, spreadsheet);
     importCommentator(nodecg, spreadsheet);
+    importTwitchGames(nodecg, spreadsheet);
 
 }

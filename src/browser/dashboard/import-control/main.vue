@@ -17,8 +17,17 @@
       block
       value="1"
       nodecg-dialog="import-commentator"
+      class="mb-2"
     >
       Commentator Import
+    </v-btn>
+    <v-btn
+      :disabled="!isGoogleApiDefined"
+      block
+      value="1"
+      nodecg-dialog="import-twitch-games"
+    >
+      Twitch Games Import
     </v-btn>
   </v-app>
 </template>
