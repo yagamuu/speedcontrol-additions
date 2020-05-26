@@ -5,6 +5,7 @@ var googleapis_1 = require("googleapis");
 var importUserAddition_1 = require("./importUserAddition");
 var importCommentator_1 = require("./importCommentator");
 var helper_1 = require("./lib/helper");
+var importTwitchGames_1 = require("./importTwitchGames");
 exports.spreadsheet = function (nodecg) {
     var logger = new nodecg.Logger(nodecg.bundleName + ":spreadsheet");
     var googleApiDefinedRep = nodecg.Replicant('googleApiDefined', { defaultValue: false });
@@ -76,4 +77,5 @@ exports.spreadsheet = function (nodecg) {
     nodecg.listenFor('loadSheetsFromSpreadsheet', loadSpreadsheet);
     importUserAddition_1.importUserAddition(nodecg, spreadsheet);
     importCommentator_1.importCommentator(nodecg, spreadsheet);
+    importTwitchGames_1.importTwitchGames(nodecg, spreadsheet);
 };
