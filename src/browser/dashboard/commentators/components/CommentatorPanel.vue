@@ -91,7 +91,7 @@
           small
           outlined
           color="white"
-          @click="openCommentatorModification"
+          @click="deleteCommentator"
         >
           <v-icon x-small>
             fas fa-user-minus
@@ -108,6 +108,7 @@ import { Commentator } from '../../../../nodecg/generated/commentator';
 import { COLORS } from '../../../plugin/styles';
 import { commentatorModificationModule as commentatorModification } from '../commentatorModification';
 import { speedcontrolModule } from '../../../plugin/speedcontrol';
+import { replicantModule } from '../../../plugin/replicant';
 
 @Component
 export default class CommentatorPanel extends Vue {
@@ -134,6 +135,11 @@ export default class CommentatorPanel extends Vue {
   @Emit()
   async openCommentatorModification(): Promise<void> {
     commentatorModification.transitionToModification(this.commentator);
+  }
+
+  @Emit()
+  async deleteCommentator(): Promise<void> {
+    replicantModule.removeCommentator(this.commentator.id);
   }
 
 }

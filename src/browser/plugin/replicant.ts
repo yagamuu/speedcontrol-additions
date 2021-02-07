@@ -77,6 +77,11 @@ class Replicant extends VuexModule {
         assignedRunIdArray,
       })
     }
+
+    @Action
+    public removeCommentator(id: string): void {
+      nodecg.sendMessage('removeCommentator', id);
+    }
 }
 
 export const replicantModule = getModule(Replicant);

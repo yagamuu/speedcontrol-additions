@@ -23,6 +23,9 @@ export type MessageMap = {
   'updateCommentator': {
     data: Commentator
   };
+  'removeCommentator': {
+    data: string
+  };
 
   'loadSheetsFromSpreadsheet': {
     data: string;

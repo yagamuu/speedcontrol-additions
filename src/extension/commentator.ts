@@ -44,6 +44,17 @@ export const commentator = (nodecg: NodeCG): void => {
     logger.info(`Add commentator ${JSON.stringify({ name, social, assigned })}`);
   }
 
+  const removeCommentator = (id: string): void => {
+
+    if (!commentatorArrayRep.value) { return; }
+
+    commentatorArrayRep.value = commentatorArrayRep.value.filter((commentator) => {
+      return commentator.id !== id;
+    });
+
+    logger.info(`Remove commentator, id=${id}`);
+  }
+
   nodecg.listenFor('updateCommentator', (data, ack) => {
     updateCommentator(data);
 
@@ -62,5 +73,13 @@ export const commentator = (nodecg: NodeCG): void => {
     if (ack && !ack.handled) {
       ack(null);
     }
-  })
+  });
+
+  nodecg.listenFor('removeCommentator', (data, ack) => {
+    removeCommentator(data);
+
+    if (ack && !ack.handled) {
+      ack(null);
+    }
+  });
 }

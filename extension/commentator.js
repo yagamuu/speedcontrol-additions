@@ -33,6 +33,15 @@ var commentator = function (nodecg) {
         });
         logger.info("Add commentator " + JSON.stringify({ name: name, social: social, assigned: assigned }));
     };
+    var removeCommentator = function (id) {
+        if (!commentatorArrayRep.value) {
+            return;
+        }
+        commentatorArrayRep.value = commentatorArrayRep.value.filter(function (commentator) {
+            return commentator.id !== id;
+        });
+        logger.info("Remove commentator, id=" + id);
+    };
     nodecg.listenFor('updateCommentator', function (data, ack) {
         updateCommentator(data);
         if (ack && !ack.handled) {
@@ -45,6 +54,12 @@ var commentator = function (nodecg) {
             social: data.social,
             assigned: data.assignedRunIdArray,
         });
+        if (ack && !ack.handled) {
+            ack(null);
+        }
+    });
+    nodecg.listenFor('removeCommentator', function (data, ack) {
+        removeCommentator(data);
         if (ack && !ack.handled) {
             ack(null);
         }
