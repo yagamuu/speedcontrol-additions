@@ -7,16 +7,4 @@
 
 export interface Configschema {
 	googleApiKey?: string;
-	spotify?: {
-		clientId?: string;
-		clientSecret?: string;
-		redirectUri?: string;
-	};
-	twitter?: {
-		targetWords?: string[];
-		consumerKey?: string;
-		consumerSecret?: string;
-		accessTokenKey?: string;
-		accessTokenSecret?: string;
-	};
 }

@@ -117,7 +117,7 @@ export default class CommentatorPanel extends Vue {
   get assignedRunNames(): string[] {
     return this.commentator.assignedRunIdArray.map((runId) => {
       const assigndRun = speedcontrolModule.runDataArray.find((runData) => {
-        return runData.id === runId;
+        return runData.externalID === runId;
       });
       if (assigndRun) {
         return `${assigndRun.category} - ${assigndRun.game}`;

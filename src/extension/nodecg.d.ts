@@ -4,7 +4,7 @@ import { ReplicantMap } from '../nodecg/replicants';
 import { SpeedcontrolReplicantMap } from '../nodecg/speedcontrol';
 import { MessageMap } from '../nodecg/messages';
 
-type SpeedcontrolNodeCG = CreateNodecgInstance<
+export type SpeedcontrolNodeCG = CreateNodecgInstance<
   'nodecg-speedcontrol',
   {},
   SpeedcontrolReplicantMap,
@@ -17,4 +17,4 @@ export type NodeCG = CreateNodecgInstance<
   Configschema,
   ReplicantMap,
   MessageMap
-> & SpeedcontrolNodeCG
+>;

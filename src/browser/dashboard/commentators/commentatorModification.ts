@@ -3,15 +3,17 @@ import store from '../../plugin/store';
 import { Commentator } from '../../../nodecg/generated/commentator';
 
 export enum transitionStatus {
-    userPanel,
+    commentators,
+    creationForm,
     modificationForm
 }
 
 @Module({ dynamic: true, store, name: 'commentatorModification', namespaced: true })
 class CommentatorModification extends VuexModule {
-    transition = transitionStatus.userPanel;
+    transition = transitionStatus.commentators;
     name = '';
-    id = '';
+    id: string|null = null;
+    twitch = '';
     nico = '';
     youtube = '';
     twitter = '';
@@ -21,6 +23,7 @@ class CommentatorModification extends VuexModule {
     public updateModifyCommentator(commentator: Commentator): void {
         this.name = commentator.name;
         this.id = commentator.id;
+        this.twitch = commentator.social.twitch || '';
         this.nico = commentator.social.nico || '';
         this.youtube = commentator.social.youtube || '';
         this.twitter = commentator.social.twitter || '';
@@ -28,13 +31,29 @@ class CommentatorModification extends VuexModule {
     }
 
     @Mutation
-    public closeModificationForm(): void {
-        this.transition = transitionStatus.userPanel;
+    public updateToCreation(): void {
+      this.id = null;
+      this.name = '';
+      this.twitch = '';
+      this.nico = '';
+      this.youtube = '';
+      this.twitter = '';
+      this.assignedRunIdArray = [];
     }
 
     @Mutation
     public openModificationForm(): void {
         this.transition = transitionStatus.modificationForm;
+    }
+
+    @Mutation
+    public closeForm(): void {
+        this.transition = transitionStatus.commentators;
+    }
+
+    @Mutation
+    public openCreationForm(): void {
+        this.transition = transitionStatus.creationForm;
     }
 
     @Action
@@ -43,20 +62,14 @@ class CommentatorModification extends VuexModule {
         this.openModificationForm();
     }
 
-    @Action
-    public transitionToCreation(): void {
-        this.updateModifyCommentator({
-            name: '',
-            id: '',
-            assignedRunIdArray: [],
-            social: {}
-        });
-        this.openModificationForm();
+    @Action transitionToCreation(): void {
+      this.updateToCreation();
+      this.openCreationForm();
     }
 
     @Action
-    public transitionToUserPanel(): void {
-        this.closeModificationForm();
+    public transitionToCommentator(): void {
+        this.closeForm();
     }
 }
 

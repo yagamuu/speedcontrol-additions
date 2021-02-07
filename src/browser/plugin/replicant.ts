@@ -3,6 +3,7 @@ import store from './store';
 import { ReplicantName, SpeedcontrolUserAdditionArray, SpeedcontrolPlayerArray, GoogleApiDefined, CommentatorArray, SpeedcontrolCurrentRunIndex } from '../../nodecg/replicants';
 import { SpeedcontrolUserAddition } from '../../nodecg/generated/speedcontrolUserAddition';
 import clone from 'clone';
+import { Commentator } from '../../nodecg/generated/commentator';
 
 @Module({ dynamic: true, store, name: 'replicant', namespaced: true })
 class Replicant extends VuexModule {
@@ -33,7 +34,7 @@ class Replicant extends VuexModule {
     public updateCommentatorArray(value: CommentatorArray): void {
         this.commentatorArray = value;
     }
-    
+
     @Action
     public updateUserAddition({ id, nico, youtube, twitter }: { id: string; nico: string; youtube: string; twitter: string }): void {
         const newUserAddition: SpeedcontrolUserAddition = {
@@ -45,6 +46,36 @@ class Replicant extends VuexModule {
             }
         };
         nodecg.sendMessage('updateUserAddition', newUserAddition);
+    }
+
+    @Action
+    public updateCommentator({ id, name, twitch, nico, youtube, twitter, assignedRunIdArray}: {id: string; name: string; twitch: string; nico: string; youtube: string; twitter: string; assignedRunIdArray: string[]}): void {
+      const newCommentator: Commentator = {
+        id,
+        name,
+        social: {
+          twitch: twitch !== '' ? twitch : undefined,
+          nico: nico !== '' ? nico : undefined,
+          youtube: youtube !== '' ? youtube : undefined,
+          twitter: twitter !== '' ? twitter : undefined,
+        },
+        assignedRunIdArray
+      };
+      nodecg.sendMessage('updateCommentator', newCommentator);
+    }
+
+    @Action
+    public createCommentator({ name, twitch, nico, youtube, twitter, assignedRunIdArray}: { name: string; twitch: string; nico: string; youtube: string; twitter: string; assignedRunIdArray: string[]}): void {
+      nodecg.sendMessage('createCommentator', {
+        name,
+        social: {
+          twitch: twitch !== '' ? twitch : undefined,
+          nico: nico !== '' ? nico : undefined,
+          youtube: youtube !== '' ? youtube : undefined,
+          twitter: twitter !== '' ? twitter : undefined,
+        },
+        assignedRunIdArray,
+      })
     }
 }
 

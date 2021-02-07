@@ -1,9 +1,11 @@
-import { NodeCG } from './nodecg';
+import { NodeCG, SpeedcontrolNodeCG } from './nodecg';
 
-export const speedcontrol = (nodecg: NodeCG): void => {
-    const runDataArrayRep = nodecg.Replicant('runDataArray', 'nodecg-speedcontrol');
-    const currentSurroundingRep = nodecg.Replicant('runDataActiveRunSurrounding', 'nodecg-speedcontrol');
-    const currentRunIndexRep = nodecg.Replicant('speedcontrolCurrentRunIndex', {
+export const speedcontrol = (nodecg: NodeCG|SpeedcontrolNodeCG): void => {
+	const additionsNodecg = nodecg as NodeCG;
+	const speedcontrolNodecg = nodecg as SpeedcontrolNodeCG;
+    const runDataArrayRep = speedcontrolNodecg.Replicant('runDataArray', 'nodecg-speedcontrol');
+    const currentSurroundingRep = speedcontrolNodecg.Replicant('runDataActiveRunSurrounding', 'nodecg-speedcontrol');
+    const currentRunIndexRep = additionsNodecg.Replicant('speedcontrolCurrentRunIndex', {
         defaultValue: 0
     });
 

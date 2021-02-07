@@ -42,7 +42,7 @@
           placeholder="チャンネル名"
           hide-details
         ></v-text-field>
-        
+
         <v-text-field
           v-model="twitter"
           filled
@@ -71,7 +71,7 @@ import { userModificationModule as userModification } from '../userModification'
 import { replicantModule } from '../../../plugin/replicant';
 
 @Component
-export default class App extends Vue {
+export default class UserModificationForm extends Vue {
   id = userModification.id;
   name = userModification.name;
   nico = userModification.nico;
@@ -85,12 +85,17 @@ export default class App extends Vue {
 
   @Emit()
   updateUserAddition (): void {
+    if (!this.id) {
+      return;
+    }
+
     replicantModule.updateUserAddition({
       id: this.id,
       nico: this.nico,
       youtube: this.youtube,
       twitter: this.twitter
     });
+    this.close();
   }
 }
 </script>

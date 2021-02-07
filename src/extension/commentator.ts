@@ -1,0 +1,66 @@
+import { v4 as uuid} from 'uuid';
+import { Commentator } from '../nodecg/generated/commentator';
+import { NodeCG } from './nodecg';
+
+type Social = {
+  twitch?: string;
+  nico?: string;
+  youtube?: string;
+  twitter?: string;
+}
+
+export const commentator = (nodecg: NodeCG): void => {
+  const logger = new nodecg.Logger(`${nodecg.bundleName}:commentator`);
+  const commentatorArrayRep = nodecg.Replicant('commentatorArray', {
+      defaultValue: []
+  });
+
+  const updateCommentator = (commentator: Commentator): void => {
+
+    if (!commentatorArrayRep.value) { return; }
+
+    const commentatorIndex = commentatorArrayRep.value.findIndex((repCommentator) => {
+      return repCommentator.id === commentator.id;
+    });
+
+    if (commentatorIndex < -1) { return; }
+
+    commentatorArrayRep.value[commentatorIndex] = commentator;
+
+    logger.info(`Update commentator ${commentatorIndex}`);
+  }
+
+  const createCommentator = ({name, social, assigned}: {name: string; social: Social; assigned: string[]}): void => {
+
+    if (!commentatorArrayRep.value) { return; }
+
+    commentatorArrayRep.value.push({
+      id: uuid(),
+      name,
+      social,
+      assignedRunIdArray: assigned
+    });
+
+    logger.info(`Add commentator ${JSON.stringify({ name, social, assigned })}`);
+  }
+
+  nodecg.listenFor('updateCommentator', (data, ack) => {
+    updateCommentator(data);
+
+    if (ack && !ack.handled) {
+      ack(null);
+    }
+  });
+
+  nodecg.listenFor('createCommentator', (data, ack) => {
+    createCommentator({
+      name: data.name,
+      social: data.social,
+      assigned: data.assignedRunIdArray,
+    });
+
+    if (ack && !ack.handled) {
+      ack(null);
+    }
+  })
+}

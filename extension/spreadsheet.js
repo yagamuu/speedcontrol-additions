@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.spreadsheet = void 0;
 var tslib_1 = require("tslib");
 var googleapis_1 = require("googleapis");
 var importUserAddition_1 = require("./importUserAddition");
 var importCommentator_1 = require("./importCommentator");
 var helper_1 = require("./lib/helper");
 var importTwitchGames_1 = require("./importTwitchGames");
-exports.spreadsheet = function (nodecg) {
+var spreadsheet = function (nodecg) {
     var logger = new nodecg.Logger(nodecg.bundleName + ":spreadsheet");
     var googleApiDefinedRep = nodecg.Replicant('googleApiDefined', { defaultValue: false });
     var googleApiKey = nodecg.bundleConfig.googleApiKey;
@@ -79,3 +80,4 @@ exports.spreadsheet = function (nodecg) {
     importCommentator_1.importCommentator(nodecg, spreadsheet);
     importTwitchGames_1.importTwitchGames(nodecg, spreadsheet);
 };
+exports.spreadsheet = spreadsheet;

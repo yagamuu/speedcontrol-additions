@@ -28,6 +28,13 @@
 
       <v-form class="my-2">
         <v-text-field
+          v-model="twitch"
+          filled
+          label="Twitch"
+          hide-details
+        ></v-text-field>
+
+        <v-text-field
           v-model="nico"
           filled
           label="ニコニココミュニティ"
@@ -42,7 +49,7 @@
           placeholder="チャンネル名"
           hide-details
         ></v-text-field>
-        
+
         <v-text-field
           v-model="twitter"
           filled
@@ -52,11 +59,20 @@
           hide-details
         ></v-text-field>
 
+        <v-select
+          v-model="assigned"
+          :items="assignRuns"
+          label="担当"
+          multiple
+          chips
+          filled
+        ></v-select>
+
         <v-btn
           class="mt-2"
           block
           color="primary"
-          @click="updateUserAddition"
+          @click="updateCommentator"
         >
           Update
         </v-btn>
@@ -69,28 +85,47 @@
 import { Vue, Component, Emit } from 'vue-property-decorator';
 import { commentatorModificationModule as commentatorModification } from '../commentatorModification';
 import { replicantModule } from '../../../plugin/replicant';
+import { speedcontrolModule } from '../../../plugin/speedcontrol';
 
 @Component
 export default class CommentatorModificationForm extends Vue {
   id = commentatorModification.id;
+  twitch = commentatorModification.twitch;
   name = commentatorModification.name;
   nico = commentatorModification.nico;
   youtube = commentatorModification.youtube;
   twitter = commentatorModification.twitter;
+  assigned = commentatorModification.assignedRunIdArray;
 
-  @Emit()
-  close(): void {
-    commentatorModification.transitionToUserPanel();
+  get assignRuns(): {id: string; text: string; value: string; }[] {
+    return speedcontrolModule.runDataArray.map((run) => {
+      return {
+        id: run.id,
+        text: `${run.game} - ${run.category}`,
+        value: run.externalID
+      };
+    })
   }
 
   @Emit()
-  updateUserAddition (): void {
-    replicantModule.updateUserAddition({
-      id: this.id,
-      nico: this.nico,
-      youtube: this.youtube,
-      twitter: this.twitter
-    });
+  close(): void {
+    commentatorModification.transitionToCommentator();
+  }
+
+  @Emit()
+  updateCommentator (): void {
+    if (this.id) {
+      replicantModule.updateCommentator({
+        id: this.id,
+        name: this.name,
+        twitch: this.twitch,
+        nico: this.nico,
+        youtube: this.youtube,
+        twitter: this.twitter,
+        assignedRunIdArray: this.assigned,
+      });
+    }
+    this.close();
   }
 }
 </script>

@@ -1,12 +1,15 @@
-import { NodeCG } from './nodecg';
+import { NodeCG, SpeedcontrolNodeCG } from './nodecg';
 // eslint-disable-next-line @typescript-eslint/camelcase
 import { sheets_v4 } from 'googleapis';
 import { googleSpreadsheetUrlToId } from './lib/helper';
 
 // eslint-disable-next-line @typescript-eslint/camelcase
-export const importTwitchGames = (nodecg: NodeCG, spreadsheet: sheets_v4.Sheets): void => {
-    const logger = new nodecg.Logger(`${nodecg.bundleName}:import-twitch-games`);
-    const speedcontrolRunDataArrayRep = nodecg.Replicant('runDataArray', 'nodecg-speedcontrol');
+export const importTwitchGames = (nodecg: NodeCG|SpeedcontrolNodeCG, spreadsheet: sheets_v4.Sheets): void => {
+	const additionsNodecg = nodecg as NodeCG;
+	const speedcontrolNodecg = nodecg as SpeedcontrolNodeCG;
+
+    const logger = new additionsNodecg.Logger(`${additionsNodecg.bundleName}:import-twitch-games`);
+    const speedcontrolRunDataArrayRep = speedcontrolNodecg.Replicant('runDataArray', 'nodecg-speedcontrol');
 
     const importTwitchGamesFromSpreadsheet = async (
         url: string, sheetName: string, lineIdIndex: number, gameNameIndex: number
@@ -48,8 +51,8 @@ export const importTwitchGames = (nodecg: NodeCG, spreadsheet: sheets_v4.Sheets)
 
         return true;
     }
-    
-    nodecg.listenFor('importTwitchGamesFromSpreadsheet', ({url, sheetName, lineIdIndex, gameNameIndex}: {
+
+    additionsNodecg.listenFor('importTwitchGamesFromSpreadsheet', ({url, sheetName, lineIdIndex, gameNameIndex}: {
         url: string;
         sheetName: string;
         lineIdIndex: number;

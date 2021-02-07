@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.importCommentator = void 0;
 var tslib_1 = require("tslib");
 var uuid_1 = require("uuid");
 var helper_1 = require("./lib/helper");
 // eslint-disable-next-line @typescript-eslint/camelcase
-exports.importCommentator = function (nodecg, spreadsheet) {
+var importCommentator = function (nodecg, spreadsheet) {
     var logger = new nodecg.Logger(nodecg.bundleName + ":import-commentator");
     var commentatorArrayRep = nodecg.Replicant('commentatorArray', {
         defaultValue: []
@@ -56,3 +57,4 @@ exports.importCommentator = function (nodecg, spreadsheet) {
         }
     });
 };
+exports.importCommentator = importCommentator;

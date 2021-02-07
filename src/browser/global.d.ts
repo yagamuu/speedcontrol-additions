@@ -29,11 +29,26 @@ declare global {
       Configschema,
       ReplicantMap,
       MessageMap
-    > & SpeedcontrolInstance;
+    >;
+    const speedcontrolNodecg: CreateNodecgInstance<
+      'nodecg-speedcontrol',
+      {},
+      SpeedcontrolReplicantMap,
+      {},
+      true
+    >;
+
     const NodeCG: CreateNodecgConstructor<
       'ome-speedrun-lalyout',
       Configschema,
       ReplicantMap,
       MessageMap
-    > & SpeedcontrolConstructor;
+    >;
+    const SpeedcontrolNodeCG: CreateNodecgConstructor<
+    'nodecg-speedcontrol',
+    {},
+    SpeedcontrolReplicantMap,
+    {},
+    true
+  >
 }

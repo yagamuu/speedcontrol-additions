@@ -6,21 +6,7 @@
         "id": {
             "type": "string"
         },
-        "social": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "nico": {
-                    "type": "string"
-                },
-                "youtube": {
-                    "type": "string"
-                },
-                "twitter": {
-                    "type": "string"
-                }
-            }
-        }
+        "social": { "$ref": "additionSocial.json"}
     },
     "required": ["id", "social"]
 }

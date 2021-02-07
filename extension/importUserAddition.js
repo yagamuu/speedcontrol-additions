@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.importUserAddition = void 0;
 var tslib_1 = require("tslib");
 var helper_1 = require("./lib/helper");
 // eslint-disable-next-line @typescript-eslint/camelcase
-exports.importUserAddition = function (nodecg, spreadsheet) {
+var importUserAddition = function (nodecg, spreadsheet) {
     var logger = new nodecg.Logger(nodecg.bundleName + ":import-user-addition");
     var userAdditionArrayRep = nodecg.Replicant('speedcontrolUserAdditionArray');
     var importAdditionFromSpreadsheet = function (url, sheetName, runnerIdIndex, nicoIndex, youtubeIndex, twitterIndex) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
@@ -49,3 +50,4 @@ exports.importUserAddition = function (nodecg, spreadsheet) {
         }
     });
 };
+exports.importUserAddition = importUserAddition;

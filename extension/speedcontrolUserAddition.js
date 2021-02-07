@@ -1,16 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.speedcontrolUserAddition = void 0;
 var tslib_1 = require("tslib");
 var clone_1 = tslib_1.__importDefault(require("clone"));
-exports.speedcontrolUserAddition = function (nodecg) {
-    var logger = new nodecg.Logger(nodecg.bundleName + ":user-addition");
-    var speedcontrolPlayers = nodecg.Replicant('speedcontrolPlayerArray', {
+var speedcontrolUserAddition = function (nodecg) {
+    var additionsNodecg = nodecg;
+    var speedcontrolNodecg = nodecg;
+    var logger = new additionsNodecg.Logger(additionsNodecg.bundleName + ":user-addition");
+    var speedcontrolPlayers = additionsNodecg.Replicant('speedcontrolPlayerArray', {
         defaultValue: []
     });
-    var userAdditionArray = nodecg.Replicant('speedcontrolUserAdditionArray', {
+    var userAdditionArray = additionsNodecg.Replicant('speedcontrolUserAdditionArray', {
         defaultValue: []
     });
-    var speedcontrolRunDataArray = nodecg.Replicant('runDataArray', 'nodecg-speedcontrol');
+    var speedcontrolRunDataArray = speedcontrolNodecg.Replicant('runDataArray', 'nodecg-speedcontrol');
     speedcontrolRunDataArray.on('change', function (newVal) {
         var players = newVal.flatMap(function (runData) {
             return runData.teams.flatMap(function (team) {
@@ -27,7 +30,7 @@ exports.speedcontrolUserAddition = function (nodecg) {
             return userAdditionArray.value.find(function (userAddition) {
                 return player.externalID === userAddition.id;
             }) || {
-                id: player.id,
+                id: player.externalID,
                 social: {}
             };
         });
@@ -45,5 +48,6 @@ exports.speedcontrolUserAddition = function (nodecg) {
         }
         return;
     };
-    nodecg.listenFor('updateUserAddition', updateUserAddition);
+    additionsNodecg.listenFor('updateUserAddition', updateUserAddition);
 };
+exports.speedcontrolUserAddition = speedcontrolUserAddition;

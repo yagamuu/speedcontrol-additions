@@ -1,18 +1,21 @@
-import { NodeCG } from './nodecg';
+import { NodeCG, SpeedcontrolNodeCG } from './nodecg';
 import { SpeedcontrolPlayer } from '../nodecg/generated/speedcontrolPlayer';
 import { SpeedcontrolUserAddition } from '../nodecg/generated/speedcontrolUserAddition';
 import { RunDataArray } from '../nodecg/external/speedcontrol/runDataArray';
 import clone from 'clone';
 
-export const speedcontrolUserAddition = (nodecg: NodeCG): void => {
-    const logger = new nodecg.Logger(`${nodecg.bundleName}:user-addition`);
-    const speedcontrolPlayers = nodecg.Replicant('speedcontrolPlayerArray', {
+export const speedcontrolUserAddition = (nodecg: NodeCG|SpeedcontrolNodeCG): void => {
+	const additionsNodecg = nodecg as NodeCG;
+	const speedcontrolNodecg = nodecg as SpeedcontrolNodeCG;
+
+    const logger = new additionsNodecg.Logger(`${additionsNodecg.bundleName}:user-addition`);
+    const speedcontrolPlayers = additionsNodecg.Replicant('speedcontrolPlayerArray', {
         defaultValue: []
     });
-    const userAdditionArray = nodecg.Replicant('speedcontrolUserAdditionArray', {
+    const userAdditionArray = additionsNodecg.Replicant('speedcontrolUserAdditionArray', {
         defaultValue: []
     });
-    const speedcontrolRunDataArray = nodecg.Replicant('runDataArray', 'nodecg-speedcontrol');
+    const speedcontrolRunDataArray = speedcontrolNodecg.Replicant('runDataArray', 'nodecg-speedcontrol');
     speedcontrolRunDataArray.on('change', (newVal: RunDataArray) => {
         const players: SpeedcontrolPlayer[] = newVal.flatMap((runData) => {
             return runData.teams.flatMap((team) => {
@@ -29,7 +32,7 @@ export const speedcontrolUserAddition = (nodecg: NodeCG): void => {
             return userAdditionArray.value.find((userAddition) => {
                 return player.externalID === userAddition.id;
             }) || {
-                id: player.id,
+                id: player.externalID,
                 social: {}
             };
         });
@@ -49,5 +52,5 @@ export const speedcontrolUserAddition = (nodecg: NodeCG): void => {
         return;
     }
 
-    nodecg.listenFor('updateUserAddition', updateUserAddition);
+    additionsNodecg.listenFor('updateUserAddition', updateUserAddition);
 }

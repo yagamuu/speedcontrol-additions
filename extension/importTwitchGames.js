@@ -1,11 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.importTwitchGames = void 0;
 var tslib_1 = require("tslib");
 var helper_1 = require("./lib/helper");
 // eslint-disable-next-line @typescript-eslint/camelcase
-exports.importTwitchGames = function (nodecg, spreadsheet) {
-    var logger = new nodecg.Logger(nodecg.bundleName + ":import-twitch-games");
-    var speedcontrolRunDataArrayRep = nodecg.Replicant('runDataArray', 'nodecg-speedcontrol');
+var importTwitchGames = function (nodecg, spreadsheet) {
+    var additionsNodecg = nodecg;
+    var speedcontrolNodecg = nodecg;
+    var logger = new additionsNodecg.Logger(additionsNodecg.bundleName + ":import-twitch-games");
+    var speedcontrolRunDataArrayRep = speedcontrolNodecg.Replicant('runDataArray', 'nodecg-speedcontrol');
     var importTwitchGamesFromSpreadsheet = function (url, sheetName, lineIdIndex, gameNameIndex) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
         var spreadsheetId, valueResponse, runDataArray, twitchGames;
         return tslib_1.__generator(this, function (_a) {
@@ -43,7 +46,7 @@ exports.importTwitchGames = function (nodecg, spreadsheet) {
             }
         });
     }); };
-    nodecg.listenFor('importTwitchGamesFromSpreadsheet', function (_a, ack) {
+    additionsNodecg.listenFor('importTwitchGamesFromSpreadsheet', function (_a, ack) {
         var url = _a.url, sheetName = _a.sheetName, lineIdIndex = _a.lineIdIndex, gameNameIndex = _a.gameNameIndex;
         try {
             ack(null, importTwitchGamesFromSpreadsheet(url, sheetName, lineIdIndex, gameNameIndex));
@@ -54,3 +57,4 @@ exports.importTwitchGames = function (nodecg, spreadsheet) {
         }
     });
 };
+exports.importTwitchGames = importTwitchGames;
