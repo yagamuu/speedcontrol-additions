@@ -13,5 +13,7 @@ export interface SpeedcontrolPlayer {
 	social: {
 		twitch?: string;
 	};
-	externalID: string;
+	customData: {
+		[k: string]: string;
+	};
 }

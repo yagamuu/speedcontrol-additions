@@ -30,9 +30,9 @@ export const speedcontrolUserAddition = (nodecg: NodeCG|SpeedcontrolNodeCG): voi
         speedcontrolPlayers.value = filteredPlayers;
         userAdditionArray.value = filteredPlayers.map((player) => {
             return userAdditionArray.value.find((userAddition) => {
-                return player.externalID === userAddition.id;
+                return player.customData.oengusId === userAddition.id;
             }) || {
-                id: player.externalID,
+                id: player.customData.oengusId,
                 social: {}
             };
         });
