@@ -29,11 +29,12 @@ export interface RunData {
 			social: {
 				twitch?: string;
 			};
+			externalID: string;
 		}[];
 	}[];
 	customData: {
 		[k: string]: string;
 	};
 	id: string;
-	externalID?: string;
+	externalID: string;
 }
