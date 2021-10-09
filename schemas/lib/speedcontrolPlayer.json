@@ -24,8 +24,14 @@
 				}
 			}
 		},
-		"externalID": {
-			"type": "string"
+		"customData": {
+			"type": "object",
+			"propertyNames": {
+				"type": "string"
+			},
+			"additionalProperties": {
+				"type": "string"
+			}
 		}
 	},
 	"required": [
@@ -33,6 +39,6 @@
 		"id",
 		"teamID",
 		"social",
-		"externalID"
+		"customData"
 	]
 }

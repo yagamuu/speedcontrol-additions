@@ -13,5 +13,8 @@ export type SpeedcontrolPlayerArray = {
 	social: {
 		twitch?: string;
 	};
-	externalID: string;
+	customData: {
+		[k: string]: string;
+	};
+	[k: string]: any;
 }[];
